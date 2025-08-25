@@ -1,24 +1,22 @@
-package com.ipn.mx.springbootwebceroaexperto;
+package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api;
 
+import com.ipn.mx.springbootwebceroaexperto.common.mediator.Mediator;
+import com.ipn.mx.springbootwebceroaexperto.product.application.ProductCreateRequest;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.Product;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/products")
-public class ProductController {
+@RequiredArgsConstructor
+public class ProductController implements ProductApi {
 
-    public List<Product> products;
-
-    public ProductController() {
-        this.products = new ArrayList<>();
-        products.add(Product.builder().id(1L).name("Product 1").description("Description 1").price(100.0).image("image").build());
-        products.add(Product.builder().id(2L).name("Product 2").description("Description 2").price(200.0).image("image2").build());
-    }
+    private final Mediator mediator;// dependencia mediator inyectada a ProductController
 
     @GetMapping("")
     public ResponseEntity<List<Product>> getAllProducts(@RequestParam(required = false) String pageSize) {
@@ -61,17 +59,17 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         products.removeIf(p -> p.getId().equals(id));
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("")
-    public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
-        products.add(product);
-        return ResponseEntity
-                .created(URI.create("/api/v1/products/".concat(product.getId().toString())))
-                .build();
+    public ResponseEntity<Void> saveProduct(@RequestBody Product product) {
+        mediator
+                .dispatch(new ProductCreateRequest(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getImage()));// dispatch recibe una clase "T", la cual, en el mismo dispatch en "<R, T extends Request<R>>", se especifica que T es una clase que extiende de Request que recibe un generico "R" (como Void)
+
+        return ResponseEntity.created(URI.create("/api/v1/products/".concat(product.getId().toString()))).build();
     }
 
 
