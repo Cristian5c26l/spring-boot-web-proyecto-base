@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 @Component
 public class Mediator {// Component hace que Mediator sea una clase inyectable a otra clase (@Repository internamente tambien tiene a @Component por lo cual Repository hace que una clase sea inyectable a otra)
 
-    Map<? extends Class<?>, RequestHandler<?, ?>> requestHandlerMap;// ? extends Class<?> hace referencia a clases como ProductCreateRequest por ejemplo porque extiende o implementa Request<Void>. RequestHandler<?, ?> hace referencia a clases como ProductCreateHandler la cual implementa RequestHandler<ProductCreateRequest, Void>
+    Map<? extends Class<?>, RequestHandler<?, ?>> requestHandlerMap;// ? extends Class<?> hace referencia a clases como CreateProductRequest por ejemplo porque extiende o implementa Request<Void>. RequestHandler<?, ?> hace referencia a clases como CreateProductHandler la cual implementa RequestHandler<CreateProductRequest, Void>
 
-    public Mediator(List<RequestHandler<?, ?>> requestHandlers) {// requestHandlers contiene puras implementaciones o clases que implementan RequestHandler como por ejemplo ProductCreateHandler
-        this.requestHandlerMap = requestHandlers.stream().collect(Collectors.toMap(reqHand -> reqHand.getRequestType(), Function.identity()));// mapa con clave:valor *clase (como ProductCreateRequest) que extiende o implementa de Request (que ocupa 1 generico)*:*clase (como ProductCreateHandler) que extiende o implementa de RequestHandler (que ocupa 2 genericos)*.... Function.identity()) hace referencia al elemento reqHand de la lista requestHandlers
+    public Mediator(List<RequestHandler<?, ?>> requestHandlers) {// requestHandlers contiene puras implementaciones o clases que implementan RequestHandler como por ejemplo CreateProductHandler
+        this.requestHandlerMap = requestHandlers.stream().collect(Collectors.toMap(reqHand -> reqHand.getRequestType(), Function.identity()));// mapa con clave:valor *clase (como CreateProductRequest) que extiende o implementa de Request (que ocupa 1 generico)*:*clase (como CreateProductHandler) que extiende o implementa de RequestHandler (que ocupa 2 genericos)*.... Function.identity()) hace referencia al elemento reqHand de la lista requestHandlers
     }
 
     public <R, T extends Request<R>> R dispatch(T request) {// dispatch recibe una clase "T", la cual, en el mismo dispatch en "<R, T extends Request<R>>", se especifica que T es una clase que extiende de Request que recibe un generico "R" (como Void)
