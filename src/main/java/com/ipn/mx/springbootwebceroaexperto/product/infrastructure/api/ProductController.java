@@ -2,6 +2,10 @@ package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api;
 
 import com.ipn.mx.springbootwebceroaexperto.common.mediator.Mediator;
 import com.ipn.mx.springbootwebceroaexperto.product.application.command.create.CreateProductRequest;
+import com.ipn.mx.springbootwebceroaexperto.product.application.command.delete.DeleteProductRequest;
+import com.ipn.mx.springbootwebceroaexperto.product.application.command.update.UpdateProductRequest;
+import com.ipn.mx.springbootwebceroaexperto.product.application.query.getAll.GetAllProductRequest;
+import com.ipn.mx.springbootwebceroaexperto.product.application.query.getAll.GetAllProductResponse;
 import com.ipn.mx.springbootwebceroaexperto.product.application.query.getById.GetProductByIdRequest;
 import com.ipn.mx.springbootwebceroaexperto.product.application.query.getById.GetProductByIdResponse;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.Product;
@@ -25,7 +29,12 @@ public class ProductController implements ProductApi {
     @GetMapping("")
     public ResponseEntity<List<ProductDto>> getAllProducts(@RequestParam(required = false) String pageSize) {
 
-        return ResponseEntity.ok(null);
+        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest());
+        List<ProductDto> dtoProducts = response.getProducts().stream()
+                .map(product -> productMapper.mapToProductDto(product))
+                .toList();
+
+        return ResponseEntity.ok(dtoProducts);
     }
 
     @GetMapping("/{id}")
@@ -33,21 +42,24 @@ public class ProductController implements ProductApi {
 
         GetProductByIdResponse getProductByIdResponse = mediator.dispatch(new GetProductByIdRequest(id));// dispatch en este caso ejecuta el caso de uso GetProductByIdHandler mediante su metodo handle, y se obtiene lo que este devuelve, que en este caso es una respuesta de tipo GetByIdResponse
         Product product = getProductByIdResponse.getProduct();
-        ProductDto productDto = productMapper.mapToCreateProductDto(product);
+        ProductDto productDto = productMapper.mapToProductDto(product);
         return ResponseEntity.ok(productDto);
     }
 
     @PutMapping("")
     public ResponseEntity<Void> updateProduct(@RequestBody ProductDto productDto) {
 
-
-        return ResponseEntity.ok(null);
+        UpdateProductRequest updateProductRequest = productMapper.mapToUpdateProductRequest(productDto);
+        mediator.dispatch(updateProductRequest);
+        return ResponseEntity.noContent().build();
 
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
 
+        DeleteProductRequest deleteProductRequest = new DeleteProductRequest(id);
+        mediator.dispatch(deleteProductRequest);
         return ResponseEntity.noContent().build();
     }
 

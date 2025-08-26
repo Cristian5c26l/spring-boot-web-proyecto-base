@@ -22,6 +22,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void upsert(Product product) {// product viene de la capa de dominio (logica de negocio con la que se da vida a la aplicacion). ProductEntity hace referencia a la tabla de una  base de datos
         ProductEntity productEntity = productEntityMapper.mapToProductEntity(product);
+        products.removeIf(p -> p.getId().equals(productEntity.getId()));
         products.add(productEntity);
     }
 
