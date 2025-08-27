@@ -1,7 +1,7 @@
 package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database;
 
-import com.ipn.mx.springbootwebceroaexperto.product.domain.Product;
-import com.ipn.mx.springbootwebceroaexperto.product.domain.ProductRepository;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductEntity;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.mapper.ProductEntityMapper;
 import lombok.RequiredArgsConstructor;

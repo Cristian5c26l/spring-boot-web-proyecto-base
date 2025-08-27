@@ -1,6 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.mapper;
 
-import com.ipn.mx.springbootwebceroaexperto.product.domain.Product;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

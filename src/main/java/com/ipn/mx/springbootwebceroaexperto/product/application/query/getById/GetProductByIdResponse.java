@@ -1,6 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.query.getById;
 
-import com.ipn.mx.springbootwebceroaexperto.product.domain.Product;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.command.delete;
 
 import com.ipn.mx.springbootwebceroaexperto.common.mediator.RequestHandler;
-import com.ipn.mx.springbootwebceroaexperto.product.domain.ProductRepository;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

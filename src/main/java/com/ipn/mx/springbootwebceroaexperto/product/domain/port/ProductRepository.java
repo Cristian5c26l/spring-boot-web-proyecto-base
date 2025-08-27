@@ -1,4 +1,6 @@
-package com.ipn.mx.springbootwebceroaexperto.product.domain;
+package com.ipn.mx.springbootwebceroaexperto.product.domain.port;
+
+import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.ipn.mx.springbootwebceroaexperto.product.domain;
+package com.ipn.mx.springbootwebceroaexperto.product.domain.entity;
 
 import lombok.Builder;
 import lombok.Data;
