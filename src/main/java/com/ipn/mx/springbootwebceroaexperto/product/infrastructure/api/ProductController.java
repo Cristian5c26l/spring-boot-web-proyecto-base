@@ -9,7 +9,9 @@ import com.ipn.mx.springbootwebceroaexperto.product.application.query.getAll.Get
 import com.ipn.mx.springbootwebceroaexperto.product.application.query.getById.GetProductByIdRequest;
 import com.ipn.mx.springbootwebceroaexperto.product.application.query.getById.GetProductByIdResponse;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
+import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.CreateProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.ProductDto;
+import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.UpdateProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.mapper.ProductMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -48,9 +50,9 @@ public class ProductController implements ProductApi {
     }
 
     @PutMapping("")
-    public ResponseEntity<Void> updateProduct(@RequestBody @Valid ProductDto productDto) {
+    public ResponseEntity<Void> updateProduct(@ModelAttribute @Valid UpdateProductDto updateProductDto) {
 
-        UpdateProductRequest updateProductRequest = productMapper.mapToUpdateProductRequest(productDto);
+        UpdateProductRequest updateProductRequest = productMapper.mapToUpdateProductRequest(updateProductDto);
         mediator.dispatch(updateProductRequest);
         return ResponseEntity.noContent().build();
 
@@ -65,14 +67,14 @@ public class ProductController implements ProductApi {
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> saveProduct(@RequestBody @Valid ProductDto productDto) {
+    public ResponseEntity<Void> saveProduct(@ModelAttribute @Valid CreateProductDto createProductDto) {
         //mediator.dispatch(new CreateProductRequest(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getImage()));// dispatch recibe una clase "T", la cual, en el mismo dispatch en "<R, T extends Request<R>>", se especifica que T es una clase que extiende de Request que recibe un generico "R" (como Void)
 
-        CreateProductRequest createProductRequest = productMapper.mapToCreateProductRequest(productDto);
+        CreateProductRequest createProductRequest = productMapper.mapToCreateProductRequest(createProductDto);
 
         mediator.dispatch(createProductRequest);// ejecucion de caso de uso CreateProductHandler, que es el valor de la llave que en este caso es de tipo CreateProductRequest
 
-        return ResponseEntity.created(URI.create("/api/v1/products/".concat(productDto.getId().toString()))).build();
+        return ResponseEntity.created(URI.create("/api/v1/products/".concat(createProductDto.getId().toString()))).build();
     }
 
 
