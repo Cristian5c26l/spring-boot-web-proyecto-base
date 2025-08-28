@@ -62,8 +62,8 @@ public class ProductController implements ProductApi {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
 
         DeleteProductRequest deleteProductRequest = new DeleteProductRequest(id);
-        mediator.dispatch(deleteProductRequest);
-        return ResponseEntity.noContent().build();
+        mediator.dispatchAsync(deleteProductRequest);
+        return ResponseEntity.accepted().build();// codigo de estado 202 (accepted) indica que la peticion se acepto correctamente, y que esta se procesara asincronamente o en segundo plano
     }
 
     @PostMapping("")

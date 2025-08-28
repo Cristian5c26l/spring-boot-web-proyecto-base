@@ -14,7 +14,19 @@ public class DeleteProductHandler implements RequestHandler<DeleteProductRequest
     @Override
     public Void handle(DeleteProductRequest request) {// CreateProductRequest es la peticion o request "T" y Void es la respuesta o response "R"
         //return productRepository.findById(request.getId()).get();// productRepository.findById(request.getId()) retorna un Optional<Product>, con el metodo get() se obtiene el producto
+
+        System.out.println("Eliminando producto con id: " + request.getId());
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         productRepository.deleteById(request.getId());
+        
+        System.out.println("Producto eliminado con id: " + request.getId());
+
         return null;
     }
 
