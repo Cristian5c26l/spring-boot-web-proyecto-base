@@ -1,5 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.common.mediator;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class Mediator {// Component hace que Mediator sea una clase inyectable a otra clase (@Repository internamente tambien tiene a @Component por lo cual Repository hace que una clase sea inyectable a otra)
 
     Map<? extends Class<?>, RequestHandler<?, ?>> requestHandlerMap;// ? extends Class<?> hace referencia a clases como CreateProductRequest por ejemplo porque extiende o implementa Request<Void>. RequestHandler<?, ?> hace referencia a clases como CreateProductHandler la cual implementa RequestHandler<CreateProductRequest, Void>
@@ -21,6 +23,7 @@ public class Mediator {// Component hace que Mediator sea una clase inyectable a
         RequestHandler<T, R> handler = (RequestHandler<T, R>) requestHandlerMap.get(request.getClass());
 
         if (handler == null) {
+            log.error("No handler found for request type {}", request.getClass());
             throw new RuntimeException("No handler found for request type: " + request.getClass());
         }
 

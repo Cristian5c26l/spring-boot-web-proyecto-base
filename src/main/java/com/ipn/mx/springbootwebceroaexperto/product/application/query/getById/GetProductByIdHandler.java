@@ -5,10 +5,12 @@ import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.exception.ProductNotFoundException;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 //public class GetProductByIdHandler implements RequestHandler<GetProductByIdRequest, Product> {// CreateProductRequest es una clase (T) que implementa la interface Request<Void> (Void es R, y es la respuesta)
 public class GetProductByIdHandler implements RequestHandler<GetProductByIdRequest, GetProductByIdResponse> {
     private final ProductRepository productRepository;// A CreateProductHandler se le inyecta la dependencia productRepository a traves del constructor generado por RequiredArgsConstructor
@@ -17,7 +19,11 @@ public class GetProductByIdHandler implements RequestHandler<GetProductByIdReque
     public GetProductByIdResponse handle(GetProductByIdRequest request) {// CreateProductRequest es la peticion o request "T" y Void es la respuesta o response "R"
         //return productRepository.findById(request.getId()).get();// productRepository.findById(request.getId()) retorna un Optional<Product>, con el metodo get() se obtiene el producto
 
+        log.info("Getting product with id {}", request.getId());
+
         Product product = productRepository.findById(request.getId()).orElseThrow(() -> new ProductNotFoundException(request.getId()));
+
+        log.info("Found product with id {}", request.getId());
 
         return new GetProductByIdResponse(product);
     }
