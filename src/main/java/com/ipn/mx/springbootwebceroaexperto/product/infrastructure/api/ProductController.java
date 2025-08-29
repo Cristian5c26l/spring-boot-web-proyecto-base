@@ -13,6 +13,8 @@ import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.Creat
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.ProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.UpdateProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.mapper.ProductMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@Tag(name = "Product", description = "Product API operations")
 @RequiredArgsConstructor
 @Slf4j
 public class ProductController implements ProductApi {
@@ -31,6 +34,7 @@ public class ProductController implements ProductApi {
     private final Mediator mediator;// dependencia mediator inyectada a ProductController
     private final ProductMapper productMapper;// dependencia mediator inyectada a ProductController
 
+    @Operation(summary = "Get all products", description = "Get all products")
     @GetMapping("")
     public ResponseEntity<List<ProductDto>> getAllProducts(@RequestParam(required = false) String pageSize) {
 
@@ -46,6 +50,7 @@ public class ProductController implements ProductApi {
         return ResponseEntity.ok(dtoProducts);
     }
 
+    @Operation(summary = "Get product", description = "Get product")
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
 
@@ -60,6 +65,7 @@ public class ProductController implements ProductApi {
         return ResponseEntity.ok(productDto);
     }
 
+    @Operation(summary = "Update product", description = "Update product")
     @PutMapping("")
     public ResponseEntity<Void> updateProduct(@ModelAttribute @Valid UpdateProductDto updateProductDto) {
 
@@ -74,6 +80,7 @@ public class ProductController implements ProductApi {
 
     }
 
+    @Operation(summary = "Delete product", description = "Delete product")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
 
@@ -87,6 +94,7 @@ public class ProductController implements ProductApi {
         return ResponseEntity.accepted().build();// codigo de estado 202 (accepted) indica que la peticion se acepto correctamente, y que esta se procesara asincronamente o en segundo plano
     }
 
+    @Operation(summary = "Create product", description = "Create product")
     @PostMapping("")
     public ResponseEntity<Void> saveProduct(@ModelAttribute @Valid CreateProductDto createProductDto) {
         //mediator.dispatch(new CreateProductRequest(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getImage()));// dispatch recibe una clase "T", la cual, en el mismo dispatch en "<R, T extends Request<R>>", se especifica que T es una clase que extiende de Request que recibe un generico "R" (como Void)
