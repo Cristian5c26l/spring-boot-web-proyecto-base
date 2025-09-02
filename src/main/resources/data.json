@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Noise Cancelling Headphones",
+    "description": "High-fidelity headphones with active noise cancellation",
+    "image": "203c5de2-2345-6789-1011-bcdefabcdefa-headphones.jpg",
+    "price": 159.95
+  },
+  {
+    "name": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse with adjustable DPI",
+    "image": "a12b34cd-5678-9101-1121-abcdef123456-mouse.jpg",
+    "price": 29.99
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "description": "RGB backlit mechanical keyboard with blue switches",
+    "image": "b23c45de-6789-1011-1213-abcdef234567-keyboard.jpg",
+    "price": 89.99
+  },
+  {
+    "name": "4K Monitor",
+    "description": "Ultra HD 27-inch monitor with HDR support",
+    "image": "c34d56ef-7891-0111-3141-abcdef345678-monitor.jpg",
+    "price": 349.00
+  },
+  {
+    "name": "External SSD 1TB",
+    "description": "Portable solid-state drive with USB-C connection",
+    "image": "d45e67fg-8910-1112-4151-abcdef456789-ssd.jpg",
+    "price": 129.50
+  },
+  {
+    "name": "Smartwatch",
+    "description": "Water-resistant smartwatch with heart-rate monitor and GPS",
+    "image": "e56f78gh-9101-1213-5161-abcdef567890-smartwatch.jpg",
+    "price": 199.00
+  },
+  {
+    "name": "Bluetooth Speaker",
+    "description": "Portable speaker with 360-degree sound and deep bass",
+    "image": "f67g89hi-1011-1314-6171-abcdef678901-speaker.jpg",
+    "price": 79.95
+  },
+  {
+    "name": "Gaming Chair",
+    "description": "Ergonomic gaming chair with lumbar support and recline function",
+    "image": "g78h90ij-1112-1415-7181-abcdef789012-chair.jpg",
+    "price": 259.99
+  },
+  {
+    "name": "Webcam Full HD",
+    "description": "1080p webcam with built-in microphone and auto-focus",
+    "image": "h89i01jk-1213-1516-8191-abcdef890123-webcam.jpg",
+    "price": 59.99
+  },
+  {
+    "name": "Power Bank 20000mAh",
+    "description": "Fast-charging portable power bank with USB-C and dual output",
+    "image": "i90j12kl-1314-1617-9202-abcdef901234-powerbank.jpg",
+    "price": 45.00
+  },
+  {
+    "name": "Tablet 10 Inch",
+    "description": "Android tablet with 64GB storage and stylus support",
+    "image": "j12k34lm-1415-1718-0212-abcdef012345-tablet.jpg",
+    "price": 229.99
+  },
+  {
+    "name": "Wireless Earbuds",
+    "description": "True wireless earbuds with charging case and noise isolation",
+    "image": "k23l45mn-1516-1819-1222-abcdef123456-earbuds.jpg",
+    "price": 99.95
+  },
+  {
+    "name": "Portable Projector",
+    "description": "Mini projector with HDMI and wireless screen mirroring",
+    "image": "l34m56no-1617-1920-2232-abcdef234567-projector.jpg",
+    "price": 189.00
+  },
+  {
+    "name": "Drone 4K",
+    "description": "Quadcopter drone with 4K camera and GPS stabilization",
+    "image": "m45n67op-1718-2021-3242-abcdef345678-drone.jpg",
+    "price": 499.00
+  },
+  {
+    "name": "Action Camera",
+    "description": "Waterproof action camera with 4K recording and accessories",
+    "image": "n56o78pq-1819-2122-4252-abcdef456789-actioncam.jpg",
+    "price": 149.99
+  },
+  {
+    "name": "Fitness Tracker",
+    "description": "Lightweight tracker with sleep monitor and step counter",
+    "image": "o67p89qr-1920-2223-5262-abcdef567890-fitnesstracker.jpg",
+    "price": 55.00
+  },
+  {
+    "name": "Smart Home Hub",
+    "description": "Voice-controlled smart hub compatible with IoT devices",
+    "image": "p78q90rs-2021-2324-6272-abcdef678901-smarthub.jpg",
+    "price": 139.00
+  },
+  {
+    "name": "Electric Scooter",
+    "description": "Foldable electric scooter with 25 km range",
+    "image": "q89r01st-2122-2425-7282-abcdef789012-scooter.jpg",
+    "price": 399.99
+  },
+  {
+    "name": "VR Headset",
+    "description": "Virtual reality headset with motion controllers",
+    "image": "r90s12tu-2223-2526-8292-abcdef890123-vr.jpg",
+    "price": 299.00
+  },
+  {
+    "name": "Smart Light Bulb Pack",
+    "description": "WiFi-enabled RGB smart bulbs compatible with Alexa/Google Home",
+    "image": "s01t23uv-2324-2627-9302-abcdef901234-smartbulbs.jpg",
+    "price": 69.99
+  }
+]

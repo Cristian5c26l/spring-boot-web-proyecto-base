@@ -2,6 +2,7 @@ package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api;
 
 import com.ipn.mx.springbootwebceroaexperto.common.mediator.Mediator;
 import com.ipn.mx.springbootwebceroaexperto.product.application.command.create.CreateProductRequest;
+import com.ipn.mx.springbootwebceroaexperto.product.application.command.create.CreateProductResponse;
 import com.ipn.mx.springbootwebceroaexperto.product.application.command.delete.DeleteProductRequest;
 import com.ipn.mx.springbootwebceroaexperto.product.application.command.update.UpdateProductRequest;
 import com.ipn.mx.springbootwebceroaexperto.product.application.query.getAll.GetAllProductRequest;
@@ -99,15 +100,17 @@ public class ProductController implements ProductApi {
     public ResponseEntity<Void> saveProduct(@ModelAttribute @Valid CreateProductDto createProductDto) {
         //mediator.dispatch(new CreateProductRequest(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getImage()));// dispatch recibe una clase "T", la cual, en el mismo dispatch en "<R, T extends Request<R>>", se especifica que T es una clase que extiende de Request que recibe un generico "R" (como Void)
 
-        log.info("Saving product with id {}", createProductDto.getId());
+        log.info("Saving product");
 
         CreateProductRequest createProductRequest = productMapper.mapToCreateProductRequest(createProductDto);
 
-        mediator.dispatch(createProductRequest);// ejecucion de caso de uso CreateProductHandler, que es el valor de la llave que en este caso es de tipo CreateProductRequest
+        CreateProductResponse response = mediator.dispatch(createProductRequest);// ejecucion de caso de uso CreateProductHandler, que es el valor de la llave que en este caso es de tipo CreateProductRequest
 
-        log.info("Saved product with id {}", createProductRequest.getId());
+        Product product = response.getProduct();
 
-        return ResponseEntity.created(URI.create("/api/v1/products/".concat(createProductDto.getId().toString()))).build();
+        log.info("Saved product with id {}", product.getId());
+
+        return ResponseEntity.created(URI.create("/api/v1/products/".concat(product.getId().toString()))).build();
     }
 
 

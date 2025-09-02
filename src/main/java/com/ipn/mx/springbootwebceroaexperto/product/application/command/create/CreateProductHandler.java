@@ -11,32 +11,31 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CreateProductHandler implements RequestHandler<CreateProductRequest, Void> {// CreateProductRequest es una clase (T) que implementa la interface Request<Void> (Void es R, y es la respuesta)
+public class CreateProductHandler implements RequestHandler<CreateProductRequest, CreateProductResponse> {// CreateProductRequest es una clase (T) que implementa la interface Request<Void> (Void es R, y es la respuesta)
 
     private final ProductRepository productRepository;// A CreateProductHandler se le inyecta la dependencia productRepository a traves del constructor generado por RequiredArgsConstructor
     private final FileUtils fileUtils;
 
     @Override
-    public Void handle(CreateProductRequest request) {// CreateProductRequest es la peticion o request "T" y Void es la respuesta o response "R"
+    public CreateProductResponse handle(CreateProductRequest request) {// CreateProductRequest es la peticion o request "T" y Void es la respuesta o response "R"
 
-        log.info("Creating product with id {}", request.getId());
+        log.info("Creating product");
 
         String uniqueFileName = fileUtils.saveProductImage(request.getFile());
 
         Product product = Product
                 .builder()
-                .id(request.getId())
                 .name(request.getName())
                 .description(request.getDescription())
                 .price(request.getPrice())
                 .image(uniqueFileName)
                 .build();
 
-        productRepository.upsert(product);
+        Product storedProduct = productRepository.upsert(product);
 
-        log.info("Created product with id {}", request.getId());
+        log.info("Created product with id {}", storedProduct.getId());
 
-        return null;// null es vacio (Void, y esta en la parte de command porque este caso de uso CreateProductHandler no devuelve nada)
+        return new CreateProductResponse(storedProduct);// null es vacio (Void, y esta en la parte de command porque este caso de uso CreateProductHandler no devuelve nada)
     }
 
     @Override

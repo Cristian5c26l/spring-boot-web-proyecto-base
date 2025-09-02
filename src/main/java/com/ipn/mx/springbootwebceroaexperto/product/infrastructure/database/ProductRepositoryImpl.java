@@ -4,13 +4,13 @@ import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductEntity;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.mapper.ProductEntityMapper;
+import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.repository.QueryProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,15 +19,15 @@ import java.util.Optional;
 @Slf4j
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private final List<ProductEntity> products = new ArrayList<>();
+    private final QueryProductRepository repository;// manipulacion de la tabla "products" de la base de datos spring de postgres
 
     private final ProductEntityMapper productEntityMapper;// inyectar esta dependencia a ProductRepositoryImpl
 
     @Override
-    public void upsert(Product product) {// product viene de la capa de dominio (logica de negocio con la que se da vida a la aplicacion). ProductEntity hace referencia a la tabla de una  base de datos
+    public Product upsert(Product product) {// product viene de la capa de dominio (logica de negocio con la que se da vida a la aplicacion). ProductEntity hace referencia a la tabla de una  base de datos
         ProductEntity productEntity = productEntityMapper.mapToProductEntity(product);
-        products.removeIf(p -> p.getId().equals(productEntity.getId()));
-        products.add(productEntity);
+        ProductEntity save = repository.save(productEntity);// sirve para agregar un nuevo producto o para actualizar uno existente
+        return productEntityMapper.mapToProduct(save);
     }
 
     @Cacheable(value = "products", key = "#id")
@@ -36,15 +36,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 
         log.info("Finding product with id {}", id);
 
-        return products.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
-                .map(productEntity -> productEntityMapper.mapToProduct(productEntity));
+        return repository.findById(id).map(productEntity -> productEntityMapper.mapToProduct(productEntity));
     }
 
     @Override
     public List<Product> findAll() {
-        return products.stream()
+        return repository.findAll().stream()
                 .map(productEntity -> productEntityMapper.mapToProduct(productEntity))
                 .toList();
     }
@@ -52,6 +49,6 @@ public class ProductRepositoryImpl implements ProductRepository {
     @CacheEvict(value = "products", key = "#id")
     @Override
     public void deleteById(Long id) {
-        products.removeIf(p -> p.getId().equals(id));
+        repository.deleteById(id);
     }
 }
