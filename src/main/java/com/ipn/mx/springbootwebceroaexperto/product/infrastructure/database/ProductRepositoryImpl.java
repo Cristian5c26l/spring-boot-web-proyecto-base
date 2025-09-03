@@ -3,8 +3,10 @@ package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database;
 import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationQuery;
 import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationResult;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.ProductFilter;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductEntity;
+import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductSpecification;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.mapper.ProductEntityMapper;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.repository.QueryProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -43,11 +47,21 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public PaginationResult<Product> findAll(PaginationQuery paginationQuery) {
+    public PaginationResult<Product> findAll(PaginationQuery paginationQuery, ProductFilter productFilter) {
 
-        PageRequest pageRequest = PageRequest.of(paginationQuery.getPage(), paginationQuery.getSize());
+        PageRequest pageRequest = PageRequest.of(
+                paginationQuery.getPage(),// inicio paginacion
+                paginationQuery.getSize(),// fin paginacion
+                Sort.by(Sort.Direction.fromString(paginationQuery.getDirection()), paginationQuery.getSortBy())// ordenar los resultados de la paginacion
+        );// es posible que los resultados paginados se ordenen por varios campos
 
-        Page<ProductEntity> page = repository.findAll(pageRequest);// PageRequest es una implementacion de Pageable
+        Specification<ProductEntity> specification = Specification.allOf(
+                ProductSpecification.byName(productFilter.getName())
+                        .and(ProductSpecification.byDescription(productFilter.getDescription()))
+                        .and(ProductSpecification.byPrice(productFilter.getPriceMin(), productFilter.getPriceMax()))
+        );
+
+        Page<ProductEntity> page = repository.findAll(specification, pageRequest);// PageRequest es una implementacion de Pageable
 
         return new PaginationResult<>(
                 page.getContent().stream().map(productEntityMapper::mapToProduct).toList(),

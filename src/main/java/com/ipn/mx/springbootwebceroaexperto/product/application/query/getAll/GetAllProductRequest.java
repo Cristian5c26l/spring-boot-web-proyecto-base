@@ -2,6 +2,7 @@ package com.ipn.mx.springbootwebceroaexperto.product.application.query.getAll;
 
 import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.Request;
 import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationQuery;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.ProductFilter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,4 +11,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class GetAllProductRequest implements Request<GetAllProductResponse> {
     private PaginationQuery paginationQuery;
+    private ProductFilter productFilter;
 }

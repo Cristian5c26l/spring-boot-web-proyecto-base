@@ -12,6 +12,7 @@ import com.ipn.mx.springbootwebceroaexperto.product.application.query.getAll.Get
 import com.ipn.mx.springbootwebceroaexperto.product.application.query.getById.GetProductByIdRequest;
 import com.ipn.mx.springbootwebceroaexperto.product.application.query.getById.GetProductByIdResponse;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
+import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.ProductFilter;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.CreateProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.ProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.UpdateProductDto;
@@ -40,12 +41,23 @@ public class ProductController implements ProductApi {
     @GetMapping("")
     public ResponseEntity<PaginationResult<ProductDto>> getAllProducts(
             @RequestParam(defaultValue = "0") int pageNumber,
-            @RequestParam(defaultValue = "5") int pageSize
+            @RequestParam(defaultValue = "5") int pageSize,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Double priceMin,
+            @RequestParam(required = false) Double priceMax
     ) {
 
         log.info("Get all products");
 
-        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest(new PaginationQuery(pageNumber, pageSize)));
+        PaginationQuery paginationQuery = new PaginationQuery(pageNumber, pageSize, sortBy, direction);
+        ProductFilter productFilter = new ProductFilter(name, description, priceMin, priceMax);
+
+        GetAllProductRequest getAllProductRequest = new GetAllProductRequest(paginationQuery, productFilter);
+
+        GetAllProductResponse response = mediator.dispatch(getAllProductRequest);
         PaginationResult<Product> productsPage = response.getProductsPage();// productsPage, que viene desde el caso de uso GetAllProductRequest, tiene la propiedad "content" que en este caso, es una Lista de "Product". A parte de esa propiedad "content" cuenta con otras como "page", "size", entre otras.
 
         PaginationResult<ProductDto> productDtoPaginationResult = new PaginationResult<>(
