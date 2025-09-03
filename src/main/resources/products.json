@@ -1,0 +1,72 @@
+[
+  {
+    "description": "Laptop ultraligera ideal para oficina y universidad",
+    "image": "laptop.jpg",
+    "name": "Laptop TechZone Air",
+    "price": 899.99,
+    "product_detail_id": 1
+  },
+  {
+    "description": "Auriculares inalámbricos con alta fidelidad",
+    "image": "headphones.jpg",
+    "name": "SoundMax Pro",
+    "price": 199.50,
+    "product_detail_id": 2
+  },
+  {
+    "description": "Refrigerador familiar con gran capacidad",
+    "image": "fridge.jpg",
+    "name": "HomePlus Cool400",
+    "price": 749.00,
+    "product_detail_id": 3
+  },
+  {
+    "description": "Tarjeta gráfica potente para gamers exigentes",
+    "image": "gpu.jpg",
+    "name": "GamerPro GTX8000",
+    "price": 499.90,
+    "product_detail_id": 4
+  },
+  {
+    "description": "Reloj inteligente con monitoreo de salud",
+    "image": "smartwatch.jpg",
+    "name": "SmartLife FitBand",
+    "price": 129.99,
+    "product_detail_id": 5
+  },
+  {
+    "description": "Cámara profesional para fotógrafos",
+    "image": "camera.jpg",
+    "name": "PhotoWorld Reflex24",
+    "price": 649.00,
+    "product_detail_id": 6
+  },
+  {
+    "description": "Impresora multifuncional para oficina y hogar",
+    "image": "printer.jpg",
+    "name": "OfficeTech PrintX",
+    "price": 229.99,
+    "product_detail_id": 7
+  },
+  {
+    "description": "Batidora práctica para repostería",
+    "image": "mixer.jpg",
+    "name": "KitchenAid MixGo",
+    "price": 89.99,
+    "product_detail_id": 8
+  },
+  {
+    "description": "Panel solar de alta eficiencia energética",
+    "image": "solar.jpg",
+    "name": "EcoEnergy Sun350",
+    "price": 299.00,
+    "product_detail_id": 9
+  },
+  {
+    "description": "Router de última generación para máxima velocidad",
+    "image": "router.jpg",
+    "name": "SpeedNet WiFi6X",
+    "price": 159.99,
+    "product_detail_id": 10
+  }
+]

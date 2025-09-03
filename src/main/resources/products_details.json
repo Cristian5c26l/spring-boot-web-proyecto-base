@@ -1,0 +1,52 @@
+[
+  {
+    "provider": "TechZone",
+    "specifications": "8GB RAM, 256GB SSD, Intel i5",
+    "warranty": "1 año"
+  },
+  {
+    "provider": "SoundMax",
+    "specifications": "Auriculares Bluetooth, Cancelación de Ruido",
+    "warranty": "6 meses"
+  },
+  {
+    "provider": "HomePlus",
+    "specifications": "Refrigerador 400L, A++",
+    "warranty": "2 años"
+  },
+  {
+    "provider": "GamerPro",
+    "specifications": "Tarjeta Gráfica 8GB GDDR6",
+    "warranty": "1 año"
+  },
+  {
+    "provider": "SmartLife",
+    "specifications": "Smartwatch, Resistencia al agua, GPS",
+    "warranty": "1 año"
+  },
+  {
+    "provider": "PhotoWorld",
+    "specifications": "Cámara Reflex 24MP, Lente 18-55mm",
+    "warranty": "2 años"
+  },
+  {
+    "provider": "OfficeTech",
+    "specifications": "Impresora Multifuncional WiFi",
+    "warranty": "1 año"
+  },
+  {
+    "provider": "KitchenAid",
+    "specifications": "Batidora de 5 velocidades, 300W",
+    "warranty": "6 meses"
+  },
+  {
+    "provider": "EcoEnergy",
+    "specifications": "Panel Solar 350W Monocristalino",
+    "warranty": "10 años"
+  },
+  {
+    "provider": "SpeedNet",
+    "specifications": "Router WiFi 6, Dual Band",
+    "warranty": "2 años"
+  }
+]

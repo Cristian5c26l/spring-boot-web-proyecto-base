@@ -7,6 +7,7 @@ import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.Creat
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.ProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.UpdateProductDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
@@ -14,7 +15,10 @@ import org.mapstruct.ReportingPolicy;
 public interface ProductMapper {
     CreateProductRequest mapToCreateProductRequest(CreateProductDto createProductDto);
 
+    @Mapping(target = "provider", source = "productDetail.provider")
     ProductDto mapToProductDto(Product product);
 
     UpdateProductRequest mapToUpdateProductRequest(UpdateProductDto updateProductDto);
 }
+
+// @Mapping(target = "provider", source = "productDetail.provider") significa hacer que el productDetail.provider de Product, se mapee al string “provider” de ProductDto

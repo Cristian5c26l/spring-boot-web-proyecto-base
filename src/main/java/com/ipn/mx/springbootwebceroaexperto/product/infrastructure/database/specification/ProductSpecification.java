@@ -1,5 +1,6 @@
-package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity;
+package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.specification;
 
+import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductEntity;
 import org.springframework.data.jpa.domain.Specification;
 
 public class ProductSpecification {

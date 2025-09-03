@@ -4,6 +4,7 @@ import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.enti
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -32,4 +33,9 @@ public interface QueryProductRepository extends JpaRepository<ProductEntity, Lon
     long countByPrice(Double price);
 
     Page<ProductEntity> findAll(Specification<ProductEntity> specification, Pageable pageable);
+
+    @EntityGraph(attributePaths = {"productDetailEntity"})
+    Optional<ProductEntity> findById(Long id);
 }
+
+// @EntityGraph(attributePaths = {"productDetailEntity"}) se usa para que cuando se obtenga un product (ProductEntity) de la base de datos, venga con su correspondiente registro ProductDetailEntity (asociado por su id)

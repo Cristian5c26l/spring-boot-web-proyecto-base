@@ -1,5 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity;
 
+import com.ipn.mx.springbootwebceroaexperto.productDetail.infrastructure.ProductDetailEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,4 +17,10 @@ public class ProductEntity {
     private String description;
     private Double price;
     private String image;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_detail_id")
+    private ProductDetailEntity productDetailEntity;
 }
+
+// @JoinColumn(name = "product_detail_id") permite insertar un nuevo campo añadido a tabla "products" llamado "product_detail_id". Este campo hace referencia al campo identificador @id de la tabla "product_details" (ProductDetailEntity). Asi se ha creado esta integridad referencial. Este campo product_detail_id de esta tabla "products" tendra valores del campo "id" de la tabla "product_details" (ProductDetailEntity)
