@@ -1,6 +1,8 @@
 package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.repository;
 
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -26,4 +28,6 @@ public interface QueryProductRepository extends JpaRepository<ProductEntity, Lon
     boolean existsByName(String name);
 
     long countByPrice(Double price);
+
+    Page<ProductEntity> findAll(Pageable pageable);
 }

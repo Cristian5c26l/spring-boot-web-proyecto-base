@@ -1,4 +1,4 @@
-package com.ipn.mx.springbootwebceroaexperto.common.config;
+package com.ipn.mx.springbootwebceroaexperto.common.infrastructure.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;

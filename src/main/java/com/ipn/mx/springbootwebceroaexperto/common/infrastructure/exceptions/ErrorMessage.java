@@ -1,4 +1,4 @@
-package com.ipn.mx.springbootwebceroaexperto.common.exceptions;
+package com.ipn.mx.springbootwebceroaexperto.common.infrastructure.exceptions;
 
 import lombok.Data;
 

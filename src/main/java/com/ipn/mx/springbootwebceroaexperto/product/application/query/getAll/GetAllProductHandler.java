@@ -1,13 +1,12 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.query.getAll;
 
-import com.ipn.mx.springbootwebceroaexperto.common.mediator.RequestHandler;
+import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.RequestHandler;
+import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationResult;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +21,7 @@ public class GetAllProductHandler implements RequestHandler<GetAllProductRequest
 
         log.info("Getting all products");
 
-        List<Product> products = productRepository.findAll();
-
-        log.info("Found {} products", products.size());
+        PaginationResult<Product> products = productRepository.findAll(request.getPaginationQuery());
 
         return new GetAllProductResponse(products);
     }

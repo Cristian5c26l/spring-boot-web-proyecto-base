@@ -1,6 +1,8 @@
 package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api;
 
-import com.ipn.mx.springbootwebceroaexperto.common.mediator.Mediator;
+import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.Mediator;
+import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationQuery;
+import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationResult;
 import com.ipn.mx.springbootwebceroaexperto.product.application.command.create.CreateProductRequest;
 import com.ipn.mx.springbootwebceroaexperto.product.application.command.create.CreateProductResponse;
 import com.ipn.mx.springbootwebceroaexperto.product.application.command.delete.DeleteProductRequest;
@@ -23,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -37,18 +38,25 @@ public class ProductController implements ProductApi {
 
     @Operation(summary = "Get all products", description = "Get all products")
     @GetMapping("")
-    public ResponseEntity<List<ProductDto>> getAllProducts(@RequestParam(required = false) String pageSize) {
+    public ResponseEntity<PaginationResult<ProductDto>> getAllProducts(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "5") int pageSize
+    ) {
 
         log.info("Get all products");
 
-        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest());
-        List<ProductDto> dtoProducts = response.getProducts().stream()
-                .map(product -> productMapper.mapToProductDto(product))
-                .toList();
+        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest(new PaginationQuery(pageNumber, pageSize)));
+        PaginationResult<Product> productsPage = response.getProductsPage();// productsPage, que viene desde el caso de uso GetAllProductRequest, tiene la propiedad "content" que en este caso, es una Lista de "Product". A parte de esa propiedad "content" cuenta con otras como "page", "size", entre otras.
 
-        log.info("Found {} products", dtoProducts.size());
+        PaginationResult<ProductDto> productDtoPaginationResult = new PaginationResult<>(
+                productsPage.getContent().stream().map(productMapper::mapToProductDto).toList(),
+                productsPage.getPage(),
+                productsPage.getSize(),
+                productsPage.getTotalPages(),
+                productsPage.getTotalElements()
+        );
 
-        return ResponseEntity.ok(dtoProducts);
+        return ResponseEntity.ok(productDtoPaginationResult);
     }
 
     @Operation(summary = "Get product", description = "Get product")

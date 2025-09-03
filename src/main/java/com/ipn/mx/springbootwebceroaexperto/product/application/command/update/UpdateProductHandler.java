@@ -1,7 +1,7 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.command.update;
 
-import com.ipn.mx.springbootwebceroaexperto.common.mediator.RequestHandler;
-import com.ipn.mx.springbootwebceroaexperto.common.util.FileUtils;
+import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.RequestHandler;
+import com.ipn.mx.springbootwebceroaexperto.common.infrastructure.util.FileUtils;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.command.create;
 
-import com.ipn.mx.springbootwebceroaexperto.common.mediator.Request;
+import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.Request;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

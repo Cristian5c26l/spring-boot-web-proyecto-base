@@ -1,4 +1,4 @@
-package com.ipn.mx.springbootwebceroaexperto.common.mediator;
+package com.ipn.mx.springbootwebceroaexperto.common.application.mediator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;

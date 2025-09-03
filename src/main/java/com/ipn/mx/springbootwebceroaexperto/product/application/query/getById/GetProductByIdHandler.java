@@ -1,6 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.query.getById;
 
-import com.ipn.mx.springbootwebceroaexperto.common.mediator.RequestHandler;
+import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.RequestHandler;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.exception.ProductNotFoundException;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;

@@ -1,4 +1,4 @@
-package com.ipn.mx.springbootwebceroaexperto.common.config;
+package com.ipn.mx.springbootwebceroaexperto.common.infrastructure.config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;

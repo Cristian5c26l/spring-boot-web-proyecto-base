@@ -1,6 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.command.delete;
 
-import com.ipn.mx.springbootwebceroaexperto.common.mediator.Request;
+import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.Request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

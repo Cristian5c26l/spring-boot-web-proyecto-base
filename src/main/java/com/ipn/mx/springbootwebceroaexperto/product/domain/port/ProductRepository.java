@@ -1,8 +1,9 @@
 package com.ipn.mx.springbootwebceroaexperto.product.domain.port;
 
+import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationQuery;
+import com.ipn.mx.springbootwebceroaexperto.common.domain.PaginationResult;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository {
@@ -10,7 +11,7 @@ public interface ProductRepository {
 
     Optional<Product> findById(Long id);
 
-    List<Product> findAll();
+    PaginationResult<Product> findAll(PaginationQuery paginationQuery);
 
     void deleteById(Long id);
 }
