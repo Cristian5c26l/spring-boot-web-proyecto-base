@@ -1,8 +1,8 @@
 package com.ipn.mx.springbootwebceroaexperto.product.application.command.update;
 
 import com.ipn.mx.springbootwebceroaexperto.common.application.mediator.Request;
+import com.ipn.mx.springbootwebceroaexperto.review.domain.Review;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class UpdateProductRequest implements Request<Void> {// Para esta peticion de crear producto, la respuesta es vacia (Void) o no se tiene respuesta
@@ -11,5 +11,7 @@ public class UpdateProductRequest implements Request<Void> {// Para esta peticio
     private String name;
     private String description;
     private Double price;
-    private MultipartFile file;
+    private String provider;
+    private Review review;
+    private Long categoryId;
 }

@@ -6,7 +6,9 @@ import com.ipn.mx.springbootwebceroaexperto.product.application.command.update.U
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.CreateProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.ProductDto;
+import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.ReviewDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.UpdateProductDto;
+import com.ipn.mx.springbootwebceroaexperto.review.domain.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -23,7 +25,10 @@ public interface ProductMapper {
 
     UpdateProductRequest mapToUpdateProductRequest(UpdateProductDto updateProductDto);
 
-    default List<String> mapToCategoryNames(List<Category> categories) {
+    @Mapping(target = "product", ignore = true)
+    Review mapToReview(ReviewDto reviewDto);
+
+    default List<String> mapToCategoryNames(List<Category> categories) {// mapToCategoryNames se usa internamente (dentro de mapToProductDto) para mapear categories (que es una lista de Category) de Product, a categories pero de tipo Lista de String
         return categories.stream().map(Category::getName).toList();
     }
 }
