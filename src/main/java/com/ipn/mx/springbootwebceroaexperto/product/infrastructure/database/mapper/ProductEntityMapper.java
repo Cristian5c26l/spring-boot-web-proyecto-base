@@ -1,5 +1,7 @@
 package com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.mapper;
 
+import com.ipn.mx.springbootwebceroaexperto.category.domain.Category;
+import com.ipn.mx.springbootwebceroaexperto.category.infrastructure.CategoryEntity;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.entity.ProductEntity;
 import com.ipn.mx.springbootwebceroaexperto.review.domain.Review;
@@ -23,6 +25,12 @@ public interface ProductEntityMapper {
 
     @Mapping(target = "product", ignore = true)
     ReviewEntity mapToReviewEntity(Review review);
+
+    @Mapping(target = "products", ignore = true)
+    Category mapToCategory(CategoryEntity categoryEntity);
+
+    @Mapping(target = "products", ignore = true)
+    CategoryEntity mapToCategoryEntity(Category category);
 }
 
 // @Mapping(target = "productDetail.product", ignore = true) de ProductEntity mapToProductEntity(Product product), significa que ignore el mapeo de la propiedad product del objeto productDetail que es propiedad de ProductEntity. Con esto se evitan posibles ciclos

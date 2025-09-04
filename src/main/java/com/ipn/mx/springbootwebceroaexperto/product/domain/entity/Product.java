@@ -1,5 +1,6 @@
 package com.ipn.mx.springbootwebceroaexperto.product.domain.entity;
 
+import com.ipn.mx.springbootwebceroaexperto.category.domain.Category;
 import com.ipn.mx.springbootwebceroaexperto.productDetail.domain.ProductDetail;
 import com.ipn.mx.springbootwebceroaexperto.review.domain.Review;
 import lombok.Builder;
@@ -18,4 +19,5 @@ public class Product {
 
     private ProductDetail productDetail;
     private List<Review> reviews;
+    private List<Category> categories;
 }

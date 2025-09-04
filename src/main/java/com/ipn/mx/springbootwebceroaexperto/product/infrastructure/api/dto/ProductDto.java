@@ -14,4 +14,5 @@ public class ProductDto {
 
     private String provider;// viene de la tabla product_details (ProductDetailEntity)... a traves del mapeo de un Product a este ProductDto (ver ProductMapper y ProductMapperImpl)
     private List<ReviewDto> reviews;// viene de la tabla reviews ... a traves del mapeo de un Product a este ProductDto (ver ProductMapper y ProductMapperImpl)
+    private List<String> categories; // viene de la tabla categoryentity (o de la tabla products_categories) ... a traves del mapeo de un Product a este ProductDto (ver ProductMapper y ProductMapperImpl)
 }
