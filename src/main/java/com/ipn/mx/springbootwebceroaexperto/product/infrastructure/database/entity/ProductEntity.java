@@ -24,10 +24,10 @@ public class ProductEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_detail_id")
-    private ProductDetailEntity productDetailEntity;
+    private ProductDetailEntity productDetail;
 
-    @OneToMany(mappedBy = "productEntity")
-    private List<ReviewEntity> reviewEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "product")
+    private List<ReviewEntity> reviews = new ArrayList<>();
 }
 
 // @JoinColumn(name = "product_detail_id") permite insertar un nuevo campo añadido a tabla "products" llamado "product_detail_id". Este campo hace referencia al campo identificador @id de la tabla "product_details" (ProductDetailEntity). Asi se ha creado esta integridad referencial. Este campo product_detail_id de esta tabla "products" tendra valores del campo "id" de la tabla "product_details" (ProductDetailEntity)

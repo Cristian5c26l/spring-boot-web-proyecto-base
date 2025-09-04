@@ -16,8 +16,8 @@ public class ProductDetailEntity {
     private String warranty;
     private String provider;
 
-    @OneToOne(mappedBy = "productDetailEntity")
-    private ProductEntity productEntity;
+    @OneToOne(mappedBy = "productDetail")
+    private ProductEntity product;
 }
 
 // @OneToOne(mappedBy = "productDetailEntity") permite que la relacion establecida en ProductEntity, que es de 1 a 1 entre ProductEntity y ProductDetailEntity, funcione

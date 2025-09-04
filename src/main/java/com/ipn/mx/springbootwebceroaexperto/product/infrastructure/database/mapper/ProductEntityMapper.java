@@ -12,22 +12,17 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface ProductEntityMapper {
 
-    @Mapping(target = "productDetailEntity", source = "productDetail")
-    @Mapping(target = "reviewEntities", source = "reviews")
-    @Mapping(target = "productDetailEntity.productEntity", ignore = true)
+    @Mapping(target = "productDetail.product", ignore = true)
     ProductEntity mapToProductEntity(Product product);
 
-    @Mapping(target = "productDetail", source = "productDetailEntity")
-    @Mapping(target = "reviews", source = "reviewEntities")
     @Mapping(target = "productDetail.product", ignore = true)
     Product mapToProduct(ProductEntity productEntity);
 
     @Mapping(target = "product", ignore = true)
     Review mapToReview(ReviewEntity reviewEntity);
 
-    @Mapping(target = "productEntity", ignore = true)
+    @Mapping(target = "product", ignore = true)
     ReviewEntity mapToReviewEntity(Review review);
 }
 
-// @Mapping(target = "productDetailEntity", source = "productDetail") de ProductEntity mapToProductEntity(Product product), significa que la propiedad productDetail de Product, se va a mapear a la propiedad productDetailEntity de ProductEntity
-// @Mapping(target = "productDetailEntity.productEntity", ignore = true) de ProductEntity mapToProductEntity(Product product), significa que ignore el mapeo de la propiedad productEntity del objeto productDetailEntity que es propiedad de ProductEntity. Con esto se evitan posibles ciclos
+// @Mapping(target = "productDetail.product", ignore = true) de ProductEntity mapToProductEntity(Product product), significa que ignore el mapeo de la propiedad product del objeto productDetail que es propiedad de ProductEntity. Con esto se evitan posibles ciclos

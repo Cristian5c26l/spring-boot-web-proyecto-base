@@ -17,7 +17,7 @@ public class ReviewEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private ProductEntity productEntity;
+    private ProductEntity product;
 }
 
 // Con @ManyToOne se indica que varias Reviews estaran asociadas a 1 producto
