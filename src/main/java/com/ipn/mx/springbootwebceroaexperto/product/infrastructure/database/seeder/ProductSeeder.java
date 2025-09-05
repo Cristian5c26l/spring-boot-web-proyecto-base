@@ -6,6 +6,7 @@ import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.enti
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.database.repository.QueryProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Profile("!test")
+// Para que este ProductSeeder no se ejecute al levantar la aplicacion en modo test (como correr el archivo ProductIT)
 public class ProductSeeder implements CommandLineRunner {
 
     private final QueryProductRepository productRepository;
