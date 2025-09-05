@@ -8,6 +8,7 @@ import com.ipn.mx.springbootwebceroaexperto.product.domain.entity.Product;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.exception.ProductNotFoundException;
 import com.ipn.mx.springbootwebceroaexperto.product.domain.port.ProductRepository;
 import com.ipn.mx.springbootwebceroaexperto.productDetail.domain.ProductDetail;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(rollbackOn = Exception.class)
 public class UpdateProductHandler implements RequestHandler<UpdateProductRequest, Void> {// CreateProductRequest es una clase (T) que implementa la interface Request<Void> (Void es R, y es la respuesta)
 
     private final ProductRepository productRepository;// A CreateProductHandler se le inyecta la dependencia productRepository a traves del constructor generado por RequiredArgsConstructor
