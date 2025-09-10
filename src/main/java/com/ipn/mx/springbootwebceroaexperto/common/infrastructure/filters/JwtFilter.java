@@ -51,6 +51,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (username == null || SecurityContextHolder.getContext().getAuthentication() != null) {
             log.error("Invalid token or user already authenticated");
+            filterChain.doFilter(request, response);
             return;
         }
 
