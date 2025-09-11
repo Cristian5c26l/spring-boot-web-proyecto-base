@@ -27,9 +27,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/v1/products/**",
-                                "/api/v1/users/login"
-                        ).permitAll()
-                        .anyRequest().authenticated()
+                                "/api/v1/users/login",
+                                "/api/v1/users/register"
+                        ).permitAll()// peticiones a las rutas indicadas de arriba pasan directamente al controlador indicado sin que pasen por un filtro
+                        .anyRequest().authenticated()// peticiones a otras rutas, deben pasar por el filtro de jwtFilter y por el filtro UsernamePasswordAuthenticationFilter
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// Configura la seguridad sin manejo de sesiones: cada request debe autenticarse de forma independiente (API REST stateless), lo cual se logra con JWT
                 .authenticationProvider(authenticationProvider)
