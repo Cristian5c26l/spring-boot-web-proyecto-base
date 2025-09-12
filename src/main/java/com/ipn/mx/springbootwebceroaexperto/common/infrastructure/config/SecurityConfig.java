@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -13,6 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
+@EnableMethodSecurity
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -25,12 +27,13 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/v1/products/**",
-                                "/api/v1/users/login",
-                                "/api/v1/users/register"
-                        ).permitAll()// peticiones a las rutas indicadas de arriba pasan directamente al controlador indicado sin que pasen por un filtro
-                        .anyRequest().authenticated()// peticiones a otras rutas, deben pasar por el filtro de jwtFilter y por el filtro UsernamePasswordAuthenticationFilter
+                                .requestMatchers(
+//                                "/api/v1/products/**",
+                                        "/api/v1/users/login",
+                                        "/api/v1/users/register"
+                                ).permitAll()// peticiones a las rutas indicadas de arriba pasan primero por el filtro jwtFiler, luego el filtro UsernamePasswordAuthenticationFilter.class
+                                .requestMatchers("/actuator/**").hasAuthority("ADMIN")
+                                .anyRequest().authenticated()// peticiones a otras rutas, deben pasar por el filtro de jwtFilter y por el filtro UsernamePasswordAuthenticationFilter
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// Configura la seguridad sin manejo de sesiones: cada request debe autenticarse de forma independiente (API REST stateless), lo cual se logra con JWT
                 .authenticationProvider(authenticationProvider)
