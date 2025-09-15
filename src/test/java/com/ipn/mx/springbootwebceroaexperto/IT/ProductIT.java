@@ -4,6 +4,7 @@ import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.Produ
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -25,7 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ProductIT {
     @Autowired
-    private TestRestTemplate testRestTemplate;
+    @Qualifier("restTemplate")// para tomar la implementacion hecha por mi del TestRestTemplate de RestConfig
+    private TestRestTemplate restTemplate;
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,7 +36,7 @@ public class ProductIT {
     @Sql(value = "/it/clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getProductByIdExists() {
-        ResponseEntity<ProductDto> response = testRestTemplate.getForEntity("/api/v1/products/1", ProductDto.class);
+        ResponseEntity<ProductDto> response = restTemplate.getForEntity("/api/v1/products/1", ProductDto.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
