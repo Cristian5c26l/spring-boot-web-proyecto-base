@@ -18,6 +18,7 @@ import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.Produ
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.dto.UpdateProductDto;
 import com.ipn.mx.springbootwebceroaexperto.product.infrastructure.api.mapper.ProductMapper;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ import java.net.URI;
 @RequestMapping("/api/v1/products")
 @Tag(name = "Product", description = "Product API operations")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "Bearer Authentication")
 @Slf4j
 public class ProductController implements ProductApi {
 

@@ -30,7 +30,11 @@ public class SecurityConfig {
                                 .requestMatchers(
 //                                "/api/v1/products/**",
                                         "/api/v1/users/login",
-                                        "/api/v1/users/register"
+                                        "/api/v1/users/register",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html",
+                                        "/proxy/**"
                                 ).permitAll()// peticiones a las rutas indicadas de arriba pasan primero por el filtro jwtFiler, luego el filtro UsernamePasswordAuthenticationFilter.class
                                 .requestMatchers("/actuator/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()// peticiones a otras rutas, deben pasar por el filtro de jwtFilter y por el filtro UsernamePasswordAuthenticationFilter
