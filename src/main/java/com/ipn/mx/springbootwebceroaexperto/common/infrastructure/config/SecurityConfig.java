@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,7 +40,9 @@ public class SecurityConfig {
                                 .requestMatchers("/actuator/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()// peticiones a otras rutas, deben pasar por el filtro de jwtFilter y por el filtro UsernamePasswordAuthenticationFilter
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// Configura la seguridad sin manejo de sesiones: cada request debe autenticarse de forma independiente (API REST stateless), lo cual se logra con JWT
+                .formLogin(Customizer.withDefaults())// habilitar formulario de usuario/contraseña al acceder a una ruta proegida desde el navegador web
+                .oauth2Login(Customizer.withDefaults())// habilitar la posibilidad de que en el formulario, el usuario pueda acceder a la ruta solicitada autentixandose con algun proveedor configurado (como el de github)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

@@ -153,7 +153,11 @@
         </dependency>
         <!--Fin-->
 
-
+        <!--Para poder tener habilitado un tipo de seguridad especial al acceder a rutas protegidas: acceso a estas rutas protegidas mediante el inicio de sesion de proveedores como github-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
